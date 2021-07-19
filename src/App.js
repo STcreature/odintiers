@@ -601,13 +601,9 @@ function App() {
     const contractAddr = '0xA29172e930265886b8e648fAae3c49376DdD3695';
     const OdinContract = new web3.eth.Contract(abi, contractAddr);
     let tier = await OdinContract.methods.GetTier(state.account).call({from: state.account});
-    if(tier === "FARMER"){
-
-    }
-    else{
-      const result = await OdinContract.methods.RedeemReward(state.account).send({
-        from: state.account
-      })
+    const result = await OdinContract.methods.RedeemReward(state.account).send({
+    	from: state.account
+    })
     }
 
   }
