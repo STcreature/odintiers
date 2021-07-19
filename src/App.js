@@ -639,6 +639,8 @@ function App() {
     let result = await OdinContract.methods.GetTier(addressRec).call({from: addressRec});
     if(result === "FARMER"){
       setimgTier(FARMER)
+	  SetStatus(false)
+      SetETHTitle("CLAIM")
     }
     if(result === "VIKINGR"){
       setimgTier(VIKINGR)
