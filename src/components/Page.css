@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    scroll-snap-align: start;
+}
+
+.page-div{
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+
+.page-2{
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.welcome{
+    margin-right: 40vw;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+.invisible-welcome{
+    opacity: 0;
+}
+
+.metamask-button{
+    margin-right: 40vw;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+.welcome{
+    opacity: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+.vid{
+    position: fixed;
+    z-index: -1;
+}
+
+
+@media (min-aspect-ratio: 16/9){
+    .vid{
+        width: 100vw;
+        height: auto;
+    }
+}
+
+@media (max-aspect-ratio: 16/9){
+    .vid{
+        width: auto;
+        height: 100vh;
+    }
+}
+
+.tier{
+    opacity: 0;
+    width: 15vw;
+    height: 30vh;
+}
+
+.tierplay{
+    padding-bottom: 5vh;
+    width: 15vw;
+    height: 35vh;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
