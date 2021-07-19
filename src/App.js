@@ -606,8 +606,6 @@ function App() {
     })
     }
 
-  }
-
   async function ConnectMetamask(){
     if (typeof window.ethereum !== 'undefined') {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
