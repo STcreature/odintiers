@@ -598,7 +598,7 @@ function App() {
 
   async function RedeemETH(){
     const web3 = new Web3(window.ethereum);
-    const contractAddr = '0x5DDeEDFCB006cC124e2b994121241d7534D2E425';
+    const contractAddr = '0xA29172e930265886b8e648fAae3c49376DdD3695';
     const OdinContract = new web3.eth.Contract(abi, contractAddr);
     let tier = await OdinContract.methods.GetTier(state.account).call({from: state.account});
     if(tier === "FARMER"){
@@ -634,7 +634,7 @@ function App() {
   async function GetInformation(addressRec){
     //getting the tier
     const web3 = new Web3(window.ethereum);
-    const contractAddr = '0x5DDeEDFCB006cC124e2b994121241d7534D2E425';
+    const contractAddr = '0xA29172e930265886b8e648fAae3c49376DdD3695';
     const OdinContract = new web3.eth.Contract(abi, contractAddr);
     let result = await OdinContract.methods.GetTier(addressRec).call({from: addressRec});
     if(result === "FARMER"){
