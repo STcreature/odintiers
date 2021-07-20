@@ -2,7 +2,7 @@ import Navbar from "./components/Navbar";
 import './App.css';
 import Page from './components/Page'
 import { Button} from "./components/Button";
-import {useState, useEffect} from 'react'
+import {useState, useEffect, setState} from 'react'
 import Web3 from 'web3';
 import JARL from './Pictures/JARL.png'
 import KING from './Pictures/KING.png'
@@ -543,7 +543,7 @@ const abi = [
 ]
 
 function App() {
-
+	
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -568,6 +568,7 @@ function App() {
     nft_status:true
   }
 
+  let [addressRecepient,SetAddress] = useState()
   let [disableButtons, setDisable] = useState(state.disableButton)
   let [btnTitles, setBtnTitle] = useState(state.btnTitle)
   let [btn_styles, setBtnStyle] = useState(state.btn_styling)
@@ -600,17 +601,20 @@ function App() {
     const web3 = new Web3(window.ethereum);
     const contractAddr = '0xA29172e930265886b8e648fAae3c49376DdD3695';
     const OdinContract = new web3.eth.Contract(abi, contractAddr);
-    let tier = await OdinContract.methods.GetTier(state.account).call({from: state.account});
-    const result = await OdinContract.methods.RedeemReward(state.account).send({
-    	from: state.account
-    })
-    }
+    let tier = await OdinContract.methods.GetTier(addressRecepient).call({from: addressRecepient});
+	if (tier === "FARMER"){
 
-  async function ConnectMetamask(){
+	}
+	else{
+		const result = await OdinContract.methods.RedeemReward(addressRecepient).send({from: addressRecepient})
+	}
+  }
+
+  const ConnectMetamask = async () => {
     if (typeof window.ethereum !== 'undefined') {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      state.account = account
+      SetAddress(account)
       console.log(typeof state.account)
       console.log(state.account)
       setBtnTitle("Connected")
@@ -633,8 +637,6 @@ function App() {
     let result = await OdinContract.methods.GetTier(addressRec).call({from: addressRec});
     if(result === "FARMER"){
       setimgTier(FARMER)
-	  SetStatus(false)
-      SetETHTitle("CLAIM")
     }
     if(result === "VIKINGR"){
       setimgTier(VIKINGR)
@@ -665,7 +667,8 @@ function App() {
     }
 
     result = await OdinContract.methods.GetHoldTime(addressRec).call({from: addressRec});
-    setholdtime(`${result} Seconds`)
+	result = result / 60
+    setholdtime(`${result} Minutes`)
 
     result = await OdinContract.methods.isJackpotWinner(addressRec).call({from: addressRec});
     if(result){
